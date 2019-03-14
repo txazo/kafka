@@ -16,7 +16,16 @@ public class KafkaProducerTest {
     @Before
     public void init() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "192.168.94.20:9091");
+        props.put("bootstrap.servers", "192.168.94.20:9091,192.168.94.20:9092,192.168.94.20:9093");
+        props.put("buffer.memory", 32 * 1000L * 1000L);
+        props.put("retries", 3);
+        props.put("acks", "all");
+        props.put("compression.type", "gzip");
+        props.put("batch.size", 16384);
+        props.put("linger.ms", 5);
+        props.put("send.buffer.bytes", 128 * 1024);
+        props.put("max.request.size", 1024 * 1024);
+        props.put("max.in.flight.requests.per.connection", 1);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         producer = new KafkaProducer<>(props);

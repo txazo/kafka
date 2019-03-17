@@ -13,9 +13,9 @@
 
     <modules>
         <module>kafka-clients</module>
-        <module>kafka-test</module>
-        <module>spring-boot-kafka-test</module>
+        <module>kafka-clients-test</module>
         <module>spring-kafka</module>
+        <module>spring-kafka-test</module>
     </modules>
 
     <properties>

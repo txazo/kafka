@@ -18,8 +18,8 @@ public class KafkaProducerTest {
 
     @Test
     public void test() throws Exception {
-        int producerThreads = 1;
-        int maxMessagesPerThread = 1;
+        int producerThreads = 10;
+        int maxMessagesPerThread = 10000000;
         KafkaProducer kafkaProducer = new KafkaProducer();
         CompletableFuture[] tasks = new CompletableFuture[producerThreads];
         ExecutorService threadPool = Executors.newFixedThreadPool(producerThreads);
@@ -29,8 +29,7 @@ public class KafkaProducerTest {
                 int sequence = 1;
                 while (sequence <= maxMessagesPerThread) {
                     String key = String.format("%02d-%08d", j + 1, sequence++);
-                    String value = new String(new byte[1024 * 16 + 1]);
-                    kafkaProducer.getProducer().send(new ProducerRecord<>(ConfigConstants.TOPIC, key, value),
+                    kafkaProducer.getProducer().send(new ProducerRecord<>(ConfigConstants.TOPIC, key, key),
                             new Callback() {
 
                                 @Override
@@ -40,7 +39,7 @@ public class KafkaProducerTest {
 
                             });
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

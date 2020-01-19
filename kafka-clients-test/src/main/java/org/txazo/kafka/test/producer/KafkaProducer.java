@@ -23,7 +23,7 @@ public class KafkaProducer {
         props.put("acks", "all");
         props.put("compression.type", "gzip");
         props.put("batch.size", 16384);
-        props.put("linger.ms", 5);
+        props.put("linger.ms", 5000);
         props.put("send.buffer.bytes", 128 * 1024);
         props.put("max.request.size", 1024 * 1024);
         props.put("max.in.flight.requests.per.connection", 1);
